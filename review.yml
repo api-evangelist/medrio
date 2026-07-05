@@ -1,0 +1,127 @@
+aid: medrio
+name: Medrio
+review:
+  question: Does Medrio expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-05'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Both of Medrio's documented public API
+    surfaces - Medrio API Connect (connectapi.medrio.com) and the mSource API
+    (esource.medrio.com) - are request/response REST over HTTPS secured with
+    OAuth 2.0. There is no server-push transport (WebSocket or SSE) on Medrio's
+    own APIs to model. API Connect does expose a "Subscriptions" resource, but
+    it is a REST-configured event-subscription mechanism (create/list/update/
+    delete subscriptions against a study's events-configuration) that would
+    deliver notifications out-of-band to a downstream system, not a persistent
+    WebSocket channel on Medrio's API.
+findings:
+  summary: |
+    Medrio does not publish a documented public WebSocket API. Medrio is an
+    eClinical / electronic data capture (EDC) platform for clinical trials.
+    It exposes two documented REST APIs. Medrio API Connect
+    (base https://connectapi.medrio.com) ships a live OpenAPI 3.0.1 description
+    ("Medrio OpenApi v.42.13.0.201") and Swagger UI covering Studies, Subjects,
+    Data Entry (eCRF), Memberships/Users, Sites, Roles, Groups, Subject
+    Statuses, Subscriptions, and Configuration, with OAuth token issuance at
+    /Oauth/token. The mSource API (base https://esource.medrio.com, V2, with V1
+    available) backs the mPRO/mCapture eCOA/ePRO apps and covers Study, Subject,
+    form, and approval data plus offline/audit/diagnostic logging, authenticated
+    with OAuth 2.0 and a required X-Medrio-ClientInfo header. Both surfaces are
+    pure request/response REST over HTTPS. No realtime, bidirectional, or
+    streaming WebSocket (ws:// or wss://) endpoint is documented on either API.
+  accessModel: |
+    Medrio's API documentation is publicly reachable (the API Connect Swagger UI
+    and raw swagger.json, and the mSource API Help pages are all viewable without
+    login), but actual use is gated to Medrio customers: calls require an OAuth
+    access token issued for a provisioned study/account. Medrio is commercial
+    eClinical software; pricing is per-study / contact-sales and not published.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://connectapi.medrio.com
+      documented: true
+      note: Medrio API Connect. OpenAPI 3.0.1 + Swagger UI. OAuth token at /Oauth/token.
+    - protocol: REST
+      scheme: https
+      baseURL: https://esource.medrio.com
+      documented: true
+      note: mSource API V2 (V1 also available). OAuth 2.0 at /api/oauth/token; requires X-Medrio-ClientInfo header.
+    - protocol: Event Subscription
+      scheme: https
+      documented: true
+      note: API Connect Subscriptions resource is REST-configured (CRUD) against a study's events-configuration; notification delivery is out-of-band, not a WebSocket channel on Medrio's API.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Medrio API Connect or the mSource API as of the review date.
+  endpointsConfirmedRest:
+    - POST   https://connectapi.medrio.com/Oauth/token
+    - GET    https://connectapi.medrio.com/api/study
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/domain
+    - GET    https://connectapi.medrio.com/api/study/feature/{feature}
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/reasonForDataChange
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/configuration
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/site
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/role
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/group
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/subjectStatus
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/subject
+    - POST   https://connectapi.medrio.com/api/study/{studyId}/subject
+    - PUT    https://connectapi.medrio.com/api/study/{studyId}/subject
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/subject/subjectStatus/deleted
+    - PUT    https://connectapi.medrio.com/api/study/{studyId}/subject/activate
+    - PUT    https://connectapi.medrio.com/api/study/{studyId}/subject/deactivate
+    - POST   https://connectapi.medrio.com/api/study/{studyId}/subject/medrioIdentifier
+    - POST   https://connectapi.medrio.com/api/study/{studyId}/subject/subjectIdentifier
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/subject/{subjectId}/visit
+    - POST   https://connectapi.medrio.com/api/study/{studyId}/SubjectVisitTemplate
+    - POST   https://connectapi.medrio.com/api/study/{studyId}/dataentry
+    - PUT    https://connectapi.medrio.com/api/study/{studyId}/dataentry
+    - POST   https://connectapi.medrio.com/api/study/{studyId}/subject/{subjectId}/visit/{visitId}/form/{formId}/dataentry
+    - PUT    https://connectapi.medrio.com/api/study/{studyId}/clearForm
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/user
+    - POST   https://connectapi.medrio.com/api/study/{studyId}/user
+    - PUT    https://connectapi.medrio.com/api/study/{studyId}/user/{userId}/role
+    - PUT    https://connectapi.medrio.com/api/study/{studyId}/user/{userId}/site
+    - DELETE https://connectapi.medrio.com/api/study/{studyId}/user/{userId}
+    - GET    https://connectapi.medrio.com/api/user
+    - PUT    https://connectapi.medrio.com/api/user
+    - PUT    https://connectapi.medrio.com/api/user/changePassword
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/subscriptions
+    - GET    https://connectapi.medrio.com/api/study/{studyId}/subscriptions/events-configuration
+    - POST   https://connectapi.medrio.com/api/study/{studyId}/subscriptions
+    - PUT    https://connectapi.medrio.com/api/study/{studyId}/subscriptions/{subscriptionId}
+    - DELETE https://connectapi.medrio.com/api/study/{studyId}/subscriptions/{subscriptionId}
+    - POST   https://esource.medrio.com/api/oauth/token
+    - GET    https://esource.medrio.com/api/v2/Study/{studyId}/User
+sources:
+  - url: https://connectapi.medrio.com/swagger/index.html
+    type: APIReference
+    note: Medrio API Connect Swagger UI (OpenAPI 3.0.1, "Medrio OpenApi v.42.13.0.201"). All REST; no WebSocket.
+  - url: https://connectapi.medrio.com/swagger/v1/swagger.json
+    type: OpenAPI
+    note: Live OpenAPI 3.0.1 description. Paths across Studies, Subjects, DataEntry, Memberships/Users, Sites, Roles, Groups, SubjectStatuses, Subscriptions, Configuration, Oauth.
+  - url: https://esource.medrio.com/Help
+    type: APIReference
+    note: mSource API V2 Help. OAuth 2.0 (POST api/oauth/token), required X-Medrio-ClientInfo header; Study/Subject/form/approval data. REST only.
+  - url: https://esource.medrio.com/Help?apiVersion=1
+    type: Documentation
+    note: mSource API V1 Help (prior version).
+  - url: https://community.medrio.com/documentation/home
+    type: Documentation
+    note: Medrio product documentation hub, including Medrio API Connect listing.
+  - url: https://medrio.com/solutions/edc/
+    type: Website
+    note: Medrio EDC solution; data export in SAS/SPSS/STATA/CSV and CDISC ODM, manually or programmatically via API.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Both of Medrio's documented public
+    APIs (API Connect and mSource) are request/response REST over HTTPS with
+    OAuth 2.0. The one event-oriented feature, API Connect Subscriptions, is
+    REST-configured and delivers notifications out-of-band rather than over a
+    persistent WebSocket channel, so there is no server-push transport on
+    Medrio's own API to model with AsyncAPI.

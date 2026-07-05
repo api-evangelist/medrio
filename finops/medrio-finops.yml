@@ -1,0 +1,90 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Medrio
+providerId: medrio
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Clinical Trials
+- Electronic Data Capture
+- EDC
+- eClinical
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Medrio spend. Medrio is licensed commercial eClinical software,
+  billed as a per-study subscription quoted by sales rather than as a metered,
+  usage-priced API. The APIs (Medrio API Connect and the mSource API) are
+  included with the underlying study/platform subscription and are not separately
+  invoiced or metered per call. Cost drivers are the licensed modules
+  (EDC, ePRO/eCOA, eConsent, RTSM), study size and duration, and total users -
+  not API request volume.
+notes: >-
+  Per-study rates are not published; obtain a quote from Medrio. Because API
+  usage is bundled into the study subscription, there is no per-call meter to
+  optimize; cost governance is about scoping modules, studies, and user seats to
+  what a program actually needs.
+sources:
+- https://medrio.com
+- https://medrio.com/solutions/edc/
+- https://medrio.com/contact/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Medrio
+serviceCategory: eClinical and Electronic Data Capture
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Contract
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+focusColumns:
+  ServiceName: Medrio eClinical Platform
+  ServiceCategory: eClinical and Electronic Data Capture
+  ProviderName: Medrio
+  PublisherName: Medrio
+  InvoiceIssuerName: Medrio
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription
+meters:
+- name: study_subscription
+  description: Per-study platform subscription; the primary Medrio cost unit, quoted by sales.
+  unit: study
+  aggregation: sum
+  dimensions:
+  - account
+  - study
+- name: licensed_modules
+  description: Modules enabled per study (EDC, ePRO/eCOA, eConsent, RTSM) that shape the quote.
+  unit: modules
+  aggregation: sum
+  dimensions:
+  - study
+- name: user_seats
+  description: Total users provisioned across studies, a pricing parameter.
+  unit: users
+  aggregation: sum
+  dimensions:
+  - account
+  - study
+principles:
+- name: Visibility
+  description: Track active studies, enabled modules, and user seats per program; API usage itself is bundled and not separately metered.
+- name: Allocation
+  description: Map each study subscription and its modules to the trial/program and cost center it belongs to.
+- name: Optimization
+  description: License only the modules and user seats a study needs; close out studies promptly; negotiate multi-study terms rather than optimizing per-call spend.
+- name: Accountability
+  description: Assign an owner per study; review renewals against active trial timelines and provisioned seats.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

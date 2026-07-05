@@ -1,0 +1,62 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Medrio
+providerId: medrio
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Clinical Trials
+- Electronic Data Capture
+- EDC
+- eClinical
+- Plans
+description: >-
+  Medrio is commercial eClinical software sold to sponsors, CROs, and life
+  sciences teams. Pricing is not published; it is quoted per study and shaped by
+  parameters such as enabled modules (EDC, ePRO/eCOA, eConsent, RTSM), deployment
+  scope, study size, and total users. There is no self-service or free public API
+  tier - API access (Medrio API Connect and the mSource API) comes with a Medrio
+  study subscription, and OAuth credentials are provisioned to customers. Prospects
+  contact Medrio sales for a customized quote.
+notes: >-
+  No public per-study or per-API price is documented. The API is not separately
+  metered as a product; it is included with the underlying Medrio study/platform
+  subscription. Verify current commercial terms directly with Medrio.
+sources:
+- https://medrio.com
+- https://medrio.com/solutions/edc/
+- https://medrio.com/contact/
+- https://connectapi.medrio.com/swagger/index.html
+plans:
+- id: medrio-study-subscription
+  name: Medrio Study Subscription (Contact Sales)
+  type: enterprise
+  description: >-
+    Commercial per-study subscription to the Medrio eClinical platform. Includes
+    the modules the customer licenses (EDC, ePRO/eCOA, eConsent, RTSM) and access
+    to Medrio's documented REST APIs - Medrio API Connect and the mSource API -
+    with OAuth credentials provisioned for the study. Priced per study by quote.
+  entries:
+  - label: Per-Study Subscription
+    name: per_study_subscription
+    type: flat
+    metric: study
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales (quoted per study)
+    userMultiplied: false
+  elements:
+  - name: EDC / Electronic Data Capture
+  - name: ePRO / eCOA (mSource)
+  - name: eConsent
+  - name: RTSM
+  - name: Medrio API Connect Access
+  - name: mSource API Access
+  - name: Data Export (SAS, SPSS, STATA, CSV, CDISC ODM)
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

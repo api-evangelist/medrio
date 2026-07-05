@@ -1,0 +1,55 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Medrio
+providerId: medrio
+created: '2026-07-05'
+modified: '2026-07-05'
+reconciled: false
+tags:
+- Clinical Trials
+- Electronic Data Capture
+- EDC
+- Rate Limiting
+- Quotas
+description: >-
+  Medrio does not publish numeric rate limits for either the Medrio API Connect
+  REST API or the mSource API. Both are OAuth 2.0-secured, customer-gated
+  integration surfaces used within the scope of a licensed study rather than a
+  public self-service API, so throughput is governed by the customer's account
+  and study provisioning rather than a documented per-minute request cap.
+notes: >-
+  No per-account or per-endpoint numeric limits are documented as of the review
+  date. Clients should implement exponential backoff with jitter and honor any
+  Retry-After header on 429 responses. Confirm operational limits with Medrio
+  during integration onboarding.
+sources:
+- https://connectapi.medrio.com/swagger/index.html
+- https://esource.medrio.com/Help
+- https://community.medrio.com/documentation/home
+responseCodes:
+  throttled: 429
+limits:
+- name: API Connect Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for Medrio API Connect.
+- name: mSource API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the mSource API V2.
+- name: Study Scope
+  scope: study
+  metric: access
+  limit: per subscription
+  notes: API access is bounded by the studies and modules provisioned to the customer account.
+policies:
+- name: OAuth Token Scope
+  description: All calls require an OAuth access token issued for a provisioned study/account; access is bounded by the token's scope.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
