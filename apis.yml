@@ -146,6 +146,8 @@ apis:
     offline access, audit trail, and diagnostic logs. Secured with OAuth 2.0 and a
     required X-Medrio-ClientInfo header.
 common:
+- type: DomainSecurity
+  url: security/medrio-domain-security.yml
 - type: Website
   url: https://medrio.com
 - type: LinkedIn
