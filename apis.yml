@@ -40,7 +40,7 @@ tags:
 - Healthcare
 created: '2026-07-05'
 modified: '2026-07-05'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: medrio:medrio-studies-api
   name: Medrio Studies API
