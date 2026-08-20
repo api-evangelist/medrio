@@ -102,6 +102,11 @@ apis:
 - aid: medrio:medrio-users-memberships-api
   name: Medrio Users and Memberships API
   tags:
+  - User
+  - Memberships
+  - Roles
+  - Access
+  tags_raw:
   - Users
   - Memberships
   - Roles
@@ -121,6 +126,11 @@ apis:
 - aid: medrio:medrio-subscriptions-api
   name: Medrio Subscriptions API
   tags:
+  - Subscription
+  - Event
+  - Webhook
+  - Notification
+  tags_raw:
   - Subscriptions
   - Events
   - Webhooks
