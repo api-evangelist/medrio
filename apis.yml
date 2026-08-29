@@ -15,6 +15,17 @@ description: Medrio is an eClinical / electronic data capture (EDC) platform bui
   request/response REST over HTTPS secured with OAuth 2.0; actual use is gated to
   Medrio customers with study credentials, and commercial pricing is per-study /
   contact-sales.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: unknown
