@@ -1,0 +1,40 @@
+edges:
+- partner_name: CDISC (members)
+  partner: cdisc
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  partner_tier: GOLD
+  evidence: https://www.cdisc.org/company/medrio
+  category: Clinical data standards member
+  contract_reference:
+    register: CDISC member search (cdisc.org/members/search + public company page website)
+    standard: CDISC clinical data standards (SDTM / ADaM / CDASH / ODM)
+    spec_file: null
+    role: cdisc-member
+    registered_name: Medrio
+    register_id: medrio
+    member_industry: Technology Service Provider
+    listed_website: https://medrio.com/
+    matched_domain: medrio.com
+    matched_by: domain
+    signal_note: 'self-filed paid membership: listing alone = standard-participant (standards adopter); partner_tier
+      is the membership level, never weighted as a tier; hand-reviewed'
+    detected_by: sweep-clinical-trial-sponsors.py
+    detected: '2026-10-21'
+  detected_by: sweep-clinical-trial-sponsors.py
+  first_seen: '2026-10-21'
+generated: '2026-10-21'
+method: searched
+source:
+- https://clinicaltrials.gov/api/v2/studies
+- https://api.fda.gov/drug/drugsfda.json
+- https://euclinicaltrials.eu/ctis-public/search
+- https://www.cdisc.org/members/search
+checked:
+- https://api.fda.gov/drug/drugsfda.json
+- https://clinicaltrials.gov/api/v2/studies
+- https://euclinicaltrials.eu/ctis-public/search
+- https://www.cdisc.org/members/search
