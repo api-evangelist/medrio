@@ -1,4 +1,4 @@
-# Medrio (medrio)
+# Medrio
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,120 +64,110 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Medrio is an eClinical / electronic data capture (EDC) platform "built for small and scaling life sciences teams," spanning EDC, ePRO/eCOA, eConsent, and RTSM for clinical trials across pharma, biotech, medtech, and diagnostics. Medrio exposes two documented REST APIs for integration and data exchange: **Medrio API Connect** (`connectapi.medrio.com`) for study configuration, subject enrollment, eCRF data entry, user/membership administration, reference data, and event subscriptions; and the **mSource API** (`esource.medrio.com`) that backs the mPRO and mCapture eCOA/ePRO applications for subject-, form-, and approval-level source data capture.
+Medrio is an eClinical / electronic data capture (EDC) platform built for small and scaling life sciences teams, spanning EDC, ePRO/eCOA, eConsent, and RTSM for clinical trials across pharma, biotech, medtech, and diagnostics. Medrio exposes documented REST APIs for integration and data exchange. Medrio API Connect (connectapi.medrio.com) covers study configuration, subject enrollment and identifiers, eCRF form data entry, user and membership administration, reference data (sites, roles, groups, subject statuses), and event subscriptions; it ships a live OpenAPI 3.0 description and Swagger UI. The mSource API (esource.medrio.com) backs the mPRO and mCapture eCOA/ePRO applications for subject-, form-, and approval-level source data capture, including offline access. Both surfaces are request/response REST over HTTPS secured with OAuth 2.0; actual use is gated to Medrio customers with study credentials, and commercial pricing is per-study / contact-sales.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/medrio/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/medrio/refs/heads/main/apis.yml)
+**Areas:** Clinical Trials · Electronic Data Capture · EDC · eClinical · ePRO · eCOA · Clinical Data · Life Sciences · Healthcare
 
-## Access Model
+## Medrio on APIs.io
 
-Medrio's API **documentation is public** - the API Connect Swagger UI and its raw OpenAPI (`swagger/v1/swagger.json`), and the mSource API Help pages, are all viewable without a login. **Actual use is gated to Medrio customers.** Every call requires an OAuth access token issued for a provisioned study/account (API Connect issues tokens at `/Oauth/token`; mSource at `/api/oauth/token` and additionally requires an `X-Medrio-ClientInfo` header). Medrio is commercial eClinical software; pricing is **per study / contact-sales** and is not published. The API is not sold or metered separately - it comes with the underlying study subscription.
+Everything profiled for Medrio is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/medrio/](https://apis.io/providers/medrio/)** — or go straight to one of the APIs or properties below.
 
-Both surfaces are pure request/response REST over HTTPS. There is **no documented public WebSocket API**. API Connect does offer a REST-configured **Subscriptions** resource for study event notifications, but notification delivery is out-of-band rather than a persistent WebSocket channel.
+### APIs (6)
 
-## Tags
+- [Medrio Studies API](https://apis.io/apis/medrio/medrio-studies-api/) — List the studies available to your account and read their configuration - domains, enabled features, reason-for-data-change options, and the reference data…
+- [Medrio Subjects API](https://apis.io/apis/medrio/medrio-subjects-api/) — Create, list, and update clinical trial subjects within a study; manage Medrio and study subject identifiers (including their ePRO variants), activate or…
+- [Medrio Data Entry API](https://apis.io/apis/medrio/medrio-data-entry-api/) — Read and write electronic case report form (eCRF) data - list a subject's visits, create subject visits from a template, submit and update data entry at the…
+- [Medrio Users and Memberships API](https://apis.io/apis/medrio/medrio-users-memberships-api/) — Administer the account user profile and per-study memberships - read and update your user, change password, list study users, add users to a study, assign…
+- [Medrio Subscriptions API](https://apis.io/apis/medrio/medrio-subscriptions-api/) — Configure event subscriptions for a study - read the available events configuration, then create, list, update, and delete subscriptions so downstream…
+- [Medrio mSource API](https://apis.io/apis/medrio/medrio-msource-api/) — The V2 REST API behind Medrio's mSource eCOA/ePRO applications (mPRO and mCapture) - read study configuration, files, and users; read and write subject,…
 
-- Clinical Trials
-- Electronic Data Capture
-- EDC
-- eClinical
-- ePRO
-- eCOA
-- Clinical Data
-- Life Sciences
-- Healthcare
+### Published properties
 
-## Timestamps
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-- **Created:** 2026-07-05
-- **Modified:** 2026-07-05
+#### Security (1)
 
-## APIs
+Authentication, trust centre, and vulnerability disclosure.
 
-### Medrio Studies API
+- [Medrio Domain Security](https://apis.io/security/medrio/medrio-domain-security/)
 
-List the studies available to your account and read their configuration - domains, enabled features, reason-for-data-change options, and the reference data a study is built from (sites, roles, groups, and subject statuses).
+#### Plans and pricing (1)
 
-- **Human URL:** [https://connectapi.medrio.com/swagger/index.html](https://connectapi.medrio.com/swagger/index.html)
-- **Base URL:** `https://connectapi.medrio.com`
+Published plans, tiers and prices.
 
-#### Properties
+- [Medrio Plans Pricing](https://apis.io/plans/medrio/medrio-plans-pricing/)
 
-- [API Reference](https://connectapi.medrio.com/swagger/index.html)
-- [OpenAPI](https://connectapi.medrio.com/swagger/v1/swagger.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+#### Rate limits (1)
 
-### Medrio Subjects API
+Published request limits.
 
-Create, list, and update clinical trial subjects within a study; manage Medrio and study subject identifiers (including their ePRO variants), activate or deactivate subjects, and list deleted subjects.
+- [Medrio Rate Limits](https://apis.io/rate-limits/medrio/medrio-rate-limits/)
 
-- **Human URL:** [https://connectapi.medrio.com/swagger/index.html](https://connectapi.medrio.com/swagger/index.html)
-- **Base URL:** `https://connectapi.medrio.com`
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [API Reference](https://connectapi.medrio.com/swagger/index.html)
-- [OpenAPI](https://connectapi.medrio.com/swagger/v1/swagger.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Medrio Finops](https://apis.io/finops/medrio/medrio-finops/)
 
-### Medrio Data Entry API
+## Where to find this API
 
-Read and write electronic case report form (eCRF) data - list a subject's visits, create subject visits from a template, submit and update data entry at the study or form/visit level, and clear a form. The clinical data capture core of Medrio EDC.
-
-- **Human URL:** [https://connectapi.medrio.com/swagger/index.html](https://connectapi.medrio.com/swagger/index.html)
-- **Base URL:** `https://connectapi.medrio.com`
-
-#### Properties
-
-- [API Reference](https://connectapi.medrio.com/swagger/index.html)
-- [OpenAPI](https://connectapi.medrio.com/swagger/v1/swagger.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-### Medrio Users and Memberships API
-
-Administer the account user profile and per-study memberships - read and update your user, change password, list study users, add users to a study, assign or remove roles and site access, and remove a user from a study.
-
-- **Human URL:** [https://connectapi.medrio.com/swagger/index.html](https://connectapi.medrio.com/swagger/index.html)
-- **Base URL:** `https://connectapi.medrio.com`
-
-#### Properties
-
-- [API Reference](https://connectapi.medrio.com/swagger/index.html)
-- [OpenAPI](https://connectapi.medrio.com/swagger/v1/swagger.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-### Medrio Subscriptions API
-
-Configure event subscriptions for a study - read the available events configuration, then create, list, update, and delete subscriptions so downstream systems are notified of study events.
-
-- **Human URL:** [https://connectapi.medrio.com/swagger/index.html](https://connectapi.medrio.com/swagger/index.html)
-- **Base URL:** `https://connectapi.medrio.com`
-
-#### Properties
-
-- [API Reference](https://connectapi.medrio.com/swagger/index.html)
-- [OpenAPI](https://connectapi.medrio.com/swagger/v1/swagger.json) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-
-### Medrio mSource API
-
-The V2 REST API behind Medrio's mSource eCOA/ePRO applications (mPRO and mCapture) - read study configuration, files, and users; read and write subject, form, and approval data with an asynchronous key-based query pattern; and post offline access, audit trail, and diagnostic logs. Secured with OAuth 2.0 and a required `X-Medrio-ClientInfo` header.
-
-- **Human URL:** [https://esource.medrio.com/Help](https://esource.medrio.com/Help)
-- **Base URL:** `https://esource.medrio.com`
-
-#### Properties
-
-- [API Reference](https://esource.medrio.com/Help)
-- [Documentation (V1)](https://esource.medrio.com/Help?apiVersion=1)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://medrio.com)
-- [LinkedIn](https://www.linkedin.com/company/medrio)
 - [Documentation](https://community.medrio.com/documentation/home)
-- [API Reference](https://connectapi.medrio.com/swagger/index.html)
-- [OpenAPI](https://connectapi.medrio.com/swagger/v1/swagger.json)
-- [Sign Up / Contact Sales](https://medrio.com/contact/)
-- [Plans](plans/medrio-plans-pricing.yml)
-- [Rate Limits](rate-limits/medrio-rate-limits.yml)
-- [Fin Ops](finops/medrio-finops.yml)
+- [API reference](https://connectapi.medrio.com/swagger/index.html)
+- [Sign up](https://medrio.com/contact/)
+- [Blog](https://medrio.com/blog/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 17.9** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 24.0 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 5.3 |
+
+**Agent readiness 13.6** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 4.7** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/medrio/](https://apis.io/providers/medrio/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Medrio: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/medrio/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
